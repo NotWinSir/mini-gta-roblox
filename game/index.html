@@ -3,16 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Block Dodger</title>
+<title>Mini GTA: Blox City 3D</title>
 <style>
-  html, body { margin: 0; height: 100%; overflow: hidden; background: #11141b; }
-  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #2b2140; }
+  body { display: flex; align-items: center; justify-content: center; }
+  #stage { position: relative; line-height: 0; }
+  #gl, #hud { display: block; }
+  #hud { position: absolute; inset: 0; pointer-events: none; }
+  #fallback {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: #f5eeda; background: #2b2140; font: 20px/1.5 system-ui, sans-serif;
+    text-align: center; padding: 24px; line-height: 1.5;
+  }
+  #fallback[hidden] { display: none; }
   /* Read aloud, never shown: the status line screen readers announce. */
   #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 </style>
 </head>
 <body>
-<canvas id="game" aria-label="Block Dodger: move the paddle left and right to dodge falling blocks and catch coins"></canvas>
+<div id="stage">
+  <canvas id="gl" width="1280" height="720" aria-label="Mini GTA Blox City 3D: drive with the arrow keys or WASD, deliver packages, dodge the police"></canvas>
+  <canvas id="hud" width="1280" height="720" aria-hidden="true"></canvas>
+  <div id="fallback" hidden>
+    <p>Mini GTA: Blox City 3D needs WebGL2, and this browser does not provide it.<br>
+    Try a current desktop Chrome, Edge, Firefox or Safari and reload the page.</p>
+  </div>
+</div>
 <p id="status" role="status" aria-live="polite"></p>
 <script type="module" src="./src/main.js"></script>
 </body>
